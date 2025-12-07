@@ -144,6 +144,7 @@ Headers: Autorization: Bearer YOUR_TOKEN
 | `make` | Compile le projet |
 | `make run` | Compile et exécute |
 | `make clean` | Nettoie les fichiers compilés |
+| `make fclean` | Nettoyage complet (même les backup) |
 | `make  re` | Recompile tout (clean + all) |
 | `make debug` (Bientôt) | Compile en mode debug |
 | `make info` (Bientôt) | Affiche les infos du projet |
