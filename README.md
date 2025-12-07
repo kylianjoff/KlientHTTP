@@ -23,8 +23,24 @@
 
 ## Structure du projet
 
-'''
-'''
+```
+KlientHTTP/
+├─ Makefile # Compilation automatique
+├─ README.md # Ce fichier
+├─ include/ # Headers (.h)
+│  ├─ http_client.h # Client HTTP
+│  ├─ http_methods.h # Méthodes HTTP
+│  ├─ ui.h # Interface utilisateur
+│  └─ utils.h # Utilitaires
+├─ src/ # Sources (.c)
+│  ├─ main.c # Point d'entrée
+│  ├─ http_client.c # Implémentation client
+│  ├─ http_methods.c # Gestion des méthodes
+│  ├─ ui.c # Interface console
+│  └─ utils.c # Fonctions utilitaires
+├─ obj/ # Fichiers objets (généré)
+└─ bin/ # Exécutable (généré)
+```
 
 ---
 
@@ -36,16 +52,16 @@
 - **Make**
 - **Linux** ou **macOS** (Unix-like system)
 
-'''bash
+```bash
 # Vérifier GCC
 gcc --version
 # Vérifier Make
 make --version
-'''
+```
 
 ### Compilation
 
-'''bash
+```bash
 # Cloner ou télécharger le projet
 cd KlientHTTP
 
@@ -54,7 +70,7 @@ make
 
 # Ou compiler et exécuter directement (pas encore fonctionnel)
 make run
-'''
+```
 
 ---
 
@@ -62,9 +78,9 @@ make run
 
 ### Démarrage
 
-'''bash
+```bash
 ./bin/KlientHTTP
-'''
+```
 
 ### Navigation
 
@@ -74,14 +90,14 @@ make run
 
 ### Exemple de session
 
-'''
+```
 1. Sélectionnez une méthode HTTP (ex: GET)
 2. Entrez le hostname (ex: www.google.com)
 3. Entrez le path (ex: / ou /api/users)
 4. Ajoutez des headers si nécessaire
 5. Ajoutez un body pour POST/PUT/PATCH
 6. Confirmez et envoyez !
-'''
+```
 
 ---
 
@@ -89,29 +105,29 @@ make run
 
 ### GET simple
 
-'''
+```
 Méthode: GET
 Hostname: www.example.com
 Path: /
-'''
+```
 
 ### POST avec body JSON
 
-'''
+```
 Méthode: POST
 Hostname: httpbin.org
 Path: /post
 Body: {"name":"John","age":30}
-'''
+```
 
 ### Avec headers personnalisés
 
-'''
+```
 Méthode: GET
 Hostname: api.github.com
 Path: /users/github
 Headers: Autorization: Bearer YOUR_TOKEN
-'''
+```
 
 ### Sites de test recommandés
 
@@ -125,13 +141,13 @@ Headers: Autorization: Bearer YOUR_TOKEN
 
 | Commande | Description |
 |----------|-------------|
-| 'make' | Compile le projet |
-| 'make run' (Bientôt) | Compile et exécute |
-| 'make clean' (Bientôt) | Nettoie les fichiers compilés |
-| 'make  re' (Bientôt) | Recompile tout (clean + all) |
-| 'make debug' (Bientôt) | Compile en mode debug |
-| 'make info' (Bientôt) | Affiche les infos du projet |
-| 'make help' (Bientôt) | Affiche l'aide complète |
+| `make` | Compile le projet |
+| `make run` (Bientôt) | Compile et exécute |
+| `make clean` (Bientôt) | Nettoie les fichiers compilés |
+| `make  re` (Bientôt) | Recompile tout (clean + all) |
+| `make debug` (Bientôt) | Compile en mode debug |
+| `make info` (Bientôt) | Affiche les infos du projet |
+| `make help` (Bientôt) | Affiche l'aide complète |
 
 ---
 
@@ -139,24 +155,24 @@ Headers: Autorization: Bearer YOUR_TOKEN
 
 ### Modules
 
-#### 'http_client.c/h'
+#### `http_client.c/h`
 - Gestion des sockets TCP/IP
-- Résolution DNS avec 'gethostbyname()'
+- Résolution DNS avec `gethostbyname()`
 - Construction et envoi des requêtes HTTP
 - Réception des réponses
 
-#### 'http_method.c/h'
+#### `http_method.c/h`
 - Enumération des méthodes HTTP
 - Descriptions des méthodes
 - Utilitaires de gestion
 
-#### 'ui.c/h'
+#### `ui.c/h`
 - Interface console interactive
 - Navigation par flèches
 - Gestion des entrées utilisateur
 - Affichage coloré
 
-#### 'utils.c/h'
+#### `utils.c/h`
 - Fonctions utilitaires
 - Gestion des strings
 - Codes couleurs ANSI
@@ -168,23 +184,23 @@ Headers: Autorization: Bearer YOUR_TOKEN
 
 ### Modifier le port
 
-Dans 'http_client.h', changez :
-'''c
+Dans `http_client.h`, changez :
+```c
 #define HTTP_PORT 80 // Pour HTTP standard
 #define HTTPS_PORT 443 // Pour HTTPS (non implémenté)
-'''
+```
 
 ### Ajouter une méthode HTTP
 
-1. Ajoutez dans 'http_methods.h' :
-'''c
+1. Ajoutez dans `http_methods.h` :
+```c
 typedef enum {
     // ... méthodes existantes
     METHOD_CUSTOM
 } HttpMethod;
-'''
+```
 
-2. Mettez à jour les tableaux dans 'http_methods.c'
+2. Mettez à jour les tableaux dans `http_methods.c`
 
 ---
 
@@ -192,11 +208,11 @@ typedef enum {
 
 ### Erreur de compilation
 
-'''bash
+```bash
 # Nettoyer et recompiler
 make clean
 make
-'''
+```
 
 ### Erreur "gethostbyname failed"
 
@@ -247,13 +263,13 @@ Le projet n'est pour le moment pas ouvert aux contributions.
 
 ## Auteur
 
-Créé par Kylian JULIA (kylianjulia.fr).
+Créé par Kylian JULIA ([kylianjulia.fr](https://kylianjulia.fr/)).
 
 ---
 
 ## License
 
-Ce projet est sous licence MIT. Voir le fichier 'LICENSE' pour plus de détails.
+Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
 ---
 
