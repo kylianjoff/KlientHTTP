@@ -162,7 +162,7 @@ Headers: Autorization: Bearer YOUR_TOKEN
 - Construction et envoi des requêtes HTTP
 - Réception des réponses
 
-#### `http_method.c/h`
+#### `http_methods.c/h`
 - Enumération des méthodes HTTP
 - Descriptions des méthodes
 - Utilitaires de gestion
