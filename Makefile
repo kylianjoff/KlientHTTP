@@ -14,8 +14,27 @@ TARGET = $(BIN_DIR)/KlientHTTP
 SRC = $(wildcard $(SRC_DIR)/*.c)
 OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
-# Règle principale
-all: $(TARGET)
+# Couleurs pour les messages
+GREEN = \033[0;32m
+CYAN = \033[0;36m
+YELLOW = \033[0;33m
+RED = \033[0;31m
+BOLD = \033[1m
+RESET = \033[0m
+
+# Règle par défaut
+all: banner $(TARGET)
+	@echo ""
+	@echo "$(GREEN)$(BOLD)Compilation terminée avec succès !$(RESET)"
+	@echo "$(CYAN)Exécutez avec : ./$(TARGET)$(RESET)"
+	@echo ""
+
+# Banner de compilation
+banner:
+	@echo "$(CYAN)╔═════════════════════════════════════╗$(RESET)"
+	@echo "$(CYAN)║      Compilation de KlientHTTP      ║$(RESET)"
+	@echo "$(CYAN)╚═════════════════════════════════════╝$(RESET)"
+	@echo ""
 
 # Construction du programme
 $(TARGET): $(OBJ)
@@ -33,7 +52,17 @@ clean:
 
 fclean: clean
 	rm -rf $(TARGET)
+	rm -rf $(BIN_DIR)
 
+# Recompilation complète
 re: fclean all
+
+# Compilation et exécution
+run: all
+	@echo "$(CYAN)╔═════════════════════════════════════╗$(RESET)"
+	@echo "$(CYAN)║       Lancement de KlientHTTP       ║$(RESET)"
+	@echo "$(CYAN)╚═════════════════════════════════════╝$(RESET)"
+	@echo ""
+	@./$(TARGET)
 
 .PHONY: all clean fclean re

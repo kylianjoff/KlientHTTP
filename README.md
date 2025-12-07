@@ -142,9 +142,9 @@ Headers: Autorization: Bearer YOUR_TOKEN
 | Commande | Description |
 |----------|-------------|
 | `make` | Compile le projet |
-| `make run` (Bientôt) | Compile et exécute |
-| `make clean` (Bientôt) | Nettoie les fichiers compilés |
-| `make  re` (Bientôt) | Recompile tout (clean + all) |
+| `make run` | Compile et exécute |
+| `make clean` | Nettoie les fichiers compilés |
+| `make  re` | Recompile tout (clean + all) |
 | `make debug` (Bientôt) | Compile en mode debug |
 | `make info` (Bientôt) | Affiche les infos du projet |
 | `make help` (Bientôt) | Affiche l'aide complète |
