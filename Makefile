@@ -1,6 +1,7 @@
 # Compilateur et options
 CC = gcc
-CFLAGS = -Wall -Wextra -Iinclude
+CFLAGS = -Wall -Wextra -Iinclude -g
+LDFLAGS = -lssl -lcrypto
 
 # Répertoires
 SRC_DIR = src
@@ -40,7 +41,7 @@ banner:
 # Construction du programme
 $(TARGET): $(OBJ)
 	@mkdir -p $(BIN_DIR)
-	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET)
+	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET) $(LDFLAGS)
 
 # Compilation des .o
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c

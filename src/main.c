@@ -9,11 +9,14 @@ int main(void) {
     HttpRequest request;
     char response[BUFFER_SIZE * 4];
 
+    init_openssl();
+
     display_welcome();
 
     while(1) {
         memset(&request, 0, sizeof(HttpRequest));
         request.port = 80;
+        request.use_https = 0;
         strcpy(request.path, "/");
 
         request.method = select_http_method();
@@ -21,6 +24,16 @@ int main(void) {
         input_hostname(request.hostname, MAX_HOSTNAME);
         if(strlen(request.hostname) == 0) {
             continue;
+        }
+
+        if(confirm_action("Utiliser HTTPS ?")) {
+            request.use_https = 1;
+            request.port = 443;
+            print_colored("Mode HTTPS activé\n", COLOR_GREEN);
+        } else {
+            request.use_https = 0;
+            request.port = 80;
+            print_colored("Mode HTTP activé\n", COLOR_YELLOW);
         }
 
         input_path(request.path, MAX_PATH);
@@ -44,7 +57,15 @@ int main(void) {
         print_colored("\nEnvoie de la requête ...\n", COLOR_YELLOW);
 
         memset(response, 0, sizeof(response));
-        if(send_http_request(&request, response, sizeof(response)) == 0) {
+
+        int result;
+        if(request.use_https) {
+            result = send_https_request(&request, response, sizeof(response));
+        } else {
+            result = send_http_request(&request, response, sizeof(response));
+        }
+
+        if(result == 0) {
             display_response(response);
         } else {
             print_colored("\nErreur lors de l'envoie de la requête\n", COLOR_RED);
@@ -56,5 +77,6 @@ int main(void) {
     }
 
     display_goodbye();
+    cleanup_openssl();
     return 0;
 }

@@ -11,6 +11,7 @@
 ## Fonctionnalités
 
 - **9 méthodes HTTP** : GET, POST, PUT, DELETE, HEAD, OPTIONS, PATCH, TRACE, CONNECT
+- **Support HTTPS/SSL** avec OpenSSL
 - **Interface interactive** avec navigation par flèches
 - **Résolution DNS** automatique
 - **Headers personnalisés** optionnels
@@ -50,13 +51,43 @@ KlientHTTP/
 
 - **GCC** (GNU Compiler Collection)
 - **Make**
+- **OpenSSL** (pour le support HTTPS)
 - **Linux** ou **macOS** (Unix-like system)
+
+#### Installation des dépendances
+
+**Ubuntu/Debian :**
+```bash
+sudo apt-get update
+sudo apt-get install build-essential libssl-dev
+```
+
+**Fedora/RHEL/CentOS :**
+```bash
+sudo dnf install gcc make openssl-devel
+```
+
+**Arch Linux :**
+```bash
+sudo pacman -S base-devel openssl
+```
+
+**macOS :**
+```bash
+brew install openssl
+# Si erreur de linkage, ajouter au PATH :
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+```
+
+#### Vérification de l'installation
 
 ```bash
 # Vérifier GCC
 gcc --version
 # Vérifier Make
 make --version
+# Vérifier OpenSSL
+openssl version
 ```
 
 ### Compilation
@@ -108,32 +139,45 @@ make run
 ```
 Méthode: GET
 Hostname: www.example.com
+HTTPS: Non
 Path: /
 ```
 
-### POST avec body JSON
+### GET sécurisé (HTTPS)
+
+```
+Méthode: GET
+Hostname: www.google.com
+HTTPS: Oui
+Path: /
+```
+
+### POST avec body JSON (HTTPS)
 
 ```
 Méthode: POST
 Hostname: httpbin.org
+HTTPS: Oui
 Path: /post
 Body: {"name":"John","age":30}
 ```
 
-### Avec headers personnalisés
+### API GitHub (HTTPS avec headers)
 
 ```
 Méthode: GET
 Hostname: api.github.com
+HTTPS: Oui
 Path: /users/github
-Headers: Autorization: Bearer YOUR_TOKEN
+Headers: Authorization: Bearer YOUR_TOKEN
 ```
 
 ### Sites de test recommandés
 
-- **httpbin.org** - Service de test HTTP
-- **jsonplaceholder.typicode.com** - API REST fictive
-- **reqres.in** - API de test
+- **https://httpbin.org** - Service de test HTTP
+- **https://jsonplaceholder.typicode.com** - API REST fictive
+- **https://reqres.in** - API de test
+- **https://api.github.com** - API GitHub publique
 
 ---
 
@@ -221,6 +265,12 @@ make
 - Vérifiez le hostname saisi
 - Testez avec 'ping hostname'
 
+### Erreur "SSL handshake failed"
+
+- Le serveur ne supporte peut-être pas HTTPS
+- Essayez en mode HTTP au lieu de HTTPS
+- Vérifiez que le port 443 n'est pas bloqué
+
 ### Erreur "Connection refused"
 
 - Le serveur peut être down
@@ -250,13 +300,13 @@ Le projet n'est pour le moment pas ouvert aux contributions.
 
 ## TODO
 
-- [ ] Support HTTPS (SSL/TLS)
+- [X] Support HTTPS (SSL/TLS)
 - [ ] Sauvegarde de l'historique des requêtes
 - [ ] Export des réponses (fichier)
 - [ ] Support des cookies
 - [ ] Authentification basique/digest
 - [ ] Mode batch (non-interactif)
-- [ ] Coonfiguration via fichier
+- [ ] Configuration via fichier
 - [ ] Tests unitaires
 - [ ] Support IPv6
 
