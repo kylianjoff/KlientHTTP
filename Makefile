@@ -6,6 +6,7 @@ CFLAGS = -Wall -Wextra -Iinclude
 SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
+HDR_DIR = include
 
 # Nom de l'exécutable
 TARGET = $(BIN_DIR)/KlientHTTP
@@ -57,6 +58,25 @@ fclean: clean
 # Recompilation complète
 re: fclean all
 
+# Afficher les fichiers détectés
+info:
+	@echo "$(CYAN)=== Informations du projet ===$(RESET)"
+	@echo "$(YEllOW)Sources détectées :$(RESET)"
+	@for src in $(SRC_DIR); do echo "  - $$src"; done
+	@echo ""
+	@echo "$(YELLOW)Headers détectés :$(RESET)"
+	@for hdr in $(HDR_DIR); do echo "  - $$hdr"; done
+	@echo ""
+	@echo "$(YELLOW)Objets à générer :$(RESET)"
+	@for obj in $(OBJ_DIR); do echo "  - $$obj"; done
+	@echo ""
+	@echo "$(YELLOW)Exécutable :$(RESET) $(TARGET)"
+
+# Debug: compilation avec symboles de debug
+debug: CFLAGS += -DDEBUG -O0
+debug: clean all
+	@echo "$(GREEN)Compilation en mode DEBUG$(RESET)"
+
 # Compilation et exécution
 run: all
 	@echo "$(CYAN)╔═════════════════════════════════════╗$(RESET)"
@@ -65,4 +85,20 @@ run: all
 	@echo ""
 	@./$(TARGET)
 
+# Aide
+help:
+	@echo "$(CYAN)╔═════════════════════════════════════╗$(RESET)"
+	@echo "$(CYAN)║        Commandes disponibles        ║$(RESET)"
+	@echo "$(CYAN)╚═════════════════════════════════════╝$(RESET)"
+	@echo ""
+	@echo "  $(YELLOW)make$(RESET)			- Compile le projet"
+	@echo "  $(YELLOW)make run$(RESET)		- Compile et exéute"
+	@echo "  $(YELLOW)make clean$(RESET)		- Nettoie les fichiers compilés"
+	@echo "  $(YELLOW)make fclean$(RESET)		- Nettoyage complet"
+	@echo "  $(YELLOW)make re$(RESET)		- Recompile tout"
+	@echo "  $(YELLOW)make debug$(RESET)		- Compile en mode debug"
+	@echo "  $(YELLOW)make info$(RESET)		- Affiche les infos du projet"
+	@echo "  $(YELLOW)make help$(RESET)		- Affiche cette aide"
+
 .PHONY: all clean fclean re
+.DEFAULT_GOAL := all
