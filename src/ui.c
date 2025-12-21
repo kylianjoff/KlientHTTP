@@ -35,7 +35,11 @@ void display_welcome(void) {
     clear_screen();
     print_colored("╔═══════════════════════════════════════════════════════╗\n", COLOR_CYAN);
     print_colored("║                                                       ║\n", COLOR_CYAN);
-    print_colored("║                     KlientHTTP                        ║\n", COLOR_CYAN);
+    print_colored("║                      KlientHTTP                       ║\n", COLOR_CYAN);
+    print_colored("║                                                       ║\n", COLOR_CYAN);
+    print_colored("║                     Kylian JULIA                      ║\n", COLOR_CYAN);
+    print_colored("║        https://github.com/kylianjoff/KlientHTTP       ║\n", COLOR_CYAN);
+    print_colored("║                    kylianjulia.fr                     ║\n", COLOR_CYAN);
     print_colored("║                                                       ║\n", COLOR_CYAN);
     print_colored("║          Navigation: ↑/↓    Sélection: ENTER          ║\n", COLOR_CYAN);
     print_colored("║                                                       ║\n", COLOR_CYAN);
